@@ -53,7 +53,7 @@ function Leaderboard(id) {
     playerNameSprite.position.y = currentY
     this.sprites.push(playerNameSprite)
 
-    var companySprite = GF.text((player.company || '?').toUpperCase(), userInterface.unit(3), $.extend({}, DefaultTextOptions, { strokeThickness: userInterface.unit(0.4) }))
+    var companySprite = GF.text((player.company || '').toUpperCase(), userInterface.unit(3), $.extend({}, DefaultTextOptions, { strokeThickness: userInterface.unit(0.4) }))
     companySprite.position.x = playerNameSprite.position.x + playerNameSprite.width + userInterface.unit(2)
     companySprite.position.y = currentY + userInterface.unit(0.6)
     this.sprites.push(companySprite)
