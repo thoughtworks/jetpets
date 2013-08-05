@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['build', 'watch']);
+  grunt.registerTask('default', 'build');
   grunt.registerTask('build', ['stylus', 'browserify2:admin', 'browserify2:device', 'browserify2:game', 'copy']);
   grunt.registerTask('test',  'simplemocha');
 
