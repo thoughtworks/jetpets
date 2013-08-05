@@ -36,9 +36,13 @@ This also restarts the server
 
 ## Deploying to an external server (ex: Raspberry PI)
 
-Just run `make deploy` to copy all the required files to the server over SSH.
-Note: the game needs to be built locally first, since the server will just serve static files.
+The game needs to be built locally first, and the server will just:
 
+- run the server code (`/src`)
+- serve static assets & files (`/builtAssets`)
+
+Just run `make deploy` to build & copy all the required files over SSH.
+The server will need to run `npm install --production` to get all the runtime dependencies.
 
 ## Attribution
 
