@@ -27,6 +27,7 @@ routes.register(app);
 
 var server = http.createServer(app);
 var io = socketio.listen(server);
+io.set('log level', 1);
 
 server.listen(app.get('port'), function() {
   console.log('Server started: http://' + server.address().address + ':' + server.address().port);
