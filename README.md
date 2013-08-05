@@ -34,6 +34,11 @@ This also restarts the server
 - if something goes wrong
 - when any server-side code changes
 
+## Deploying to an external server (ex: Raspberry PI)
+
+Just run `make deploy` to copy all the required files to the server over SSH.
+Note: the game needs to be built locally first, since the server will just serve static files.
+
 
 ## Attribution
 
