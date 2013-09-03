@@ -13,7 +13,8 @@ var app = express();
 var logFile = fs.createWriteStream('./app.log', { flags: 'a' })
 
 app.configure(function() {
-  app.set('port', process.env.port || 8080)
+  app.set('port', process.env.PORT || 8080)
+  console.log("port = " + process.env.PORT);
   app.use(express.logger({
     format: 'default',
     stream: logFile
