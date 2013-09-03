@@ -25,7 +25,7 @@ exports.loadPlayers = function(callback) {
 };
 
 exports.savePlayers = function(players, callback) {
-  var content = JSON.stringify({players: players}, null, '\t');
+  var content = JSON.stringify({players: players}, null, '\t') + '\n';
   var req = s3client.put(DB_FILE, {
                            'Content-Length': content.length,
                            'Content-Type': 'application/json'
@@ -33,6 +33,8 @@ exports.savePlayers = function(players, callback) {
   req.on('response', function(res) {
            if (res.statusCode == 200) {
              console.log('Saved players to %s', res.url);
+           } else {
+             console.error('Something went wrong when saving players!');
            }
          });
   req.end(content);
