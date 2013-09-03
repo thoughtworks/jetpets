@@ -1,6 +1,6 @@
 var routie = require('../../../3rdparty/routie');
 var player = require('../player');
-var view = require('../../views/register-simple.hbs');
+var view = require('../../views/register-advanced.hbs');
 
 module.exports = function() {
   
@@ -19,8 +19,8 @@ function register(e) {
   var data = {
     firstName:    $('#firstName').val(),
     lastName:     $('#lastName').val(),
-    phoneNumber:  $('#phoneNumber').val(),
     company:      $('#company').val(),
+    country:      $('#country').val(),
     role:         $('#role').val(),
     email:        $('#email').val()
   };
