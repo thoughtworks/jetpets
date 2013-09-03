@@ -1,28 +1,39 @@
 var fs = require('fs');
+var knox = require('knox');
+var s3client = knox.createClient({
+                                   key: 'AKIAID3CTSOZIH7HSBVQ',
+                                   secret: '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',
+                                   bucket: 'tw-mtc2013'
+                                 });
 
 var DB_FILE = './players.json';
 
 exports.loadPlayers = function(callback) {
-  fs.exists(DB_FILE, function(exists) {
-    if (exists) {
-      fs.readFile(DB_FILE, function (err, data) {
-        if (err) {
-          return callback(err);
-        }
+  s3client.get(DB_FILE).on('response', function(res) {
+    if (res.statusCode == 404) {
+      callback(null, []);
+    } else {
+      var data = '';
+      res.setEncoding('utf8');
+      res.on('data', function(chunk) { data = data + chunk; });
+      res.on('end', function() {
+        console.log(data);
         callback(null, JSON.parse(data).players);
       });
-    } else {
-      callback(null, []);
     }
-  });
+  }).end();
 };
 
 exports.savePlayers = function(players, callback) {
   var content = JSON.stringify({players: players}, null, '\t');
-  fs.writeFile(DB_FILE, content, function (err) {
-    if (callback) {
-      if (err) callback(err);
-      else callback(null);
-    }
-  });
+  var req = s3client.put(DB_FILE, {
+                           'Content-Length': content.length,
+                           'Content-Type': 'application/json'
+                         });
+  req.on('response', function(res) {
+           if (res.statusCode == 200) {
+             console.log('Saved players to %s', res.url);
+           }
+         });
+  req.end(content);
 };

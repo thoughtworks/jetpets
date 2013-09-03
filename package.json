@@ -10,7 +10,8 @@
     "forever": "0.10.x",
     "underscore": "1.4.x",
     "node-uuid": "1.4.x",
-    "chromath": "git://github.com/jfsiii/chromath.git"
+    "chromath": "git://github.com/jfsiii/chromath.git",
+    "knox": "0.8.x"
   },
   "devDependencies": {
       "matchdep": "~0.1.2",
