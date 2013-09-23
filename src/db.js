@@ -1,10 +1,6 @@
 var fs = require('fs');
 var knox = require('knox');
-var s3client = knox.createClient({
-                                   key: 'AKIAID3CTSOZIH7HSBVQ',
-                                   secret: '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',
-                                   bucket: 'tw-mtc2013'
-                                 });
+var s3client = knox.createClient(require('../aws.json'));
 
 var DB_FILE = './players.json';
 
