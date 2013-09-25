@@ -35,18 +35,27 @@ server.listen(app.get('port'), function() {
 });
 
 io.sockets.on('connection', function(socket) {
+  var socketType = "unidentified";
+  console.log("New socket connection");
   socket.on('identify', function() {
+    socketType = "gameView";
     // gameview has identified itself
     bridge.connect(socket)
     console.log('Established connection with gameview');
   })
 
   socket.on('move', function(data) {
+    console.log('Received movement from player');
+    socketType = "player";
     // player moved
     var p = Player.withId(data.player);
     if (p) {
       game.send(p, data.action);
     }
+  })
+
+  socket.on('disconnect', function () {
+    console.log("Socket is gone: " + socketType);
   })
 });
 

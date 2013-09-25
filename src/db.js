@@ -17,7 +17,6 @@ exports.loadPlayers = function(callback) {
       res.setEncoding('utf8');
       res.on('data', function(chunk) { data = data + chunk; });
       res.on('end', function() {
-        console.log(data);
         callback(null, JSON.parse(data).players);
       });
     }
