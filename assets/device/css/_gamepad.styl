@@ -1,83 +1,81 @@
 P1COLOR = #0065a3
 P2COLOR = #d65100
 
-.device-background
-  position: absolute
-  z-index: -1;
-  height: 90px
-  top: 0;
-  width: 100%
 
+#page.gamepad
 
-.device
-  text-align: center
-  width: 100%
-  padding-bottom: 90px
-  
-.controller
-  max-width: 960px
-  margin: 0 auto
-  .button 
-    float: left
-    padding: 25px 0 
-    width: 50%
-    min-width: 175px
-    @media screen and (max-width: 500px)
-      &:first-child
-        padding-top: 0
-      margin: 0 auto
-      float: none  
-      display: block  
-    i
-      color: white;
-      font-size: 170px;
+  .device-background
+    position: absolute
+    z-index: -1;
+    height: 90px
+    top: 0;
+    width: 100%
 
+  .device
+    text-align: center
+    width: 100%
+    padding-bottom: 90px
 
-  .up, .down
-    border-radius: 100%
-    width: 150px
-    height: 150px
+  .controller
+    max-width: 960px
     margin: 0 auto
+    .button 
+      float: left
+      padding: 25px 0 
+      width: 50%
+      min-width: 175px
+      @media screen and (max-width: 500px)
+        &:first-child
+          padding-top: 0
+        margin: 0 auto
+        float: none  
+        display: block  
+      i
+        color: white;
+        font-size: 170px;
 
-  .up
-    i
-      line-height: 120px
+    .up, .down
+      cursor: pointer
+      border-radius: 100%
+      width: 150px
+      height: 150px
+      margin: 0 auto
 
-  .down 
-    i
-      line-height: 160px
+    .up
+      i
+        line-height: 120px
+    .down 
+      i
+        line-height: 160px
 
+  .p1
+    .device-background, .device 
+      background-color: lighten(P1COLOR, 30%)
+    .button
+      background-color: lighten(P1COLOR, 30%)
+      .up, .down 
+        background-color: P1COLOR   
+      .pressed
+        background-color: darken(P1COLOR, 30%)
+    
+  .p2
+    .device-background, .device
+      background-color: lighten(P2COLOR, 30%)
+    .button
+      background-color: lighten(P2COLOR, 30%)
+      .up, .down 
+        background-color: P2COLOR
+      .pressed
+        background-color: darken(P2COLOR, 30%)
 
-.p1
-  .device-background, .device 
-    background-color: lighten(P1COLOR, 30%)
-  .button
-    background-color: lighten(P1COLOR, 30%)
-    .up, .down 
-      background-color: P1COLOR   
-    .pressed
-      background-color: darken(P1COLOR, 30%)
-
-  
-.p2
-  .device-background, .device
-    background-color: lighten(P2COLOR, 30%)
-  .button
-    background-color: lighten(P2COLOR, 30%)
-    .up, .down 
-      background-color: P2COLOR
-    .pressed
-      background-color: darken(P2COLOR, 30%)
-
-
-.clearfix {
-  zoom: 1;
-}
-.clearfix:before,
-.clearfix:after {
-  content: "";
-  display: table;
-}
-.clearfix:after {
-  clear: both;
-}
+  .clearfix {
+    zoom: 1;
+  }
+  .clearfix:before,
+  .clearfix:after {
+    content: "";
+    display: table;
+  }
+  .clearfix:after {
+    clear: both;
+  }
