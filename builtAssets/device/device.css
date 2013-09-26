@@ -8,14 +8,14 @@ button:hover{background-color:#61ced6}
 .note{font-style:italic;text-align:center}
 #page.lobby .foo{border:0}
 .device-background{position:absolute;z-index:-1;height:90px;top:0;width:100%}
-.device{text-align:center;width:100%;height:100%;padding-bottom:90px}
+.device{text-align:center;width:100%;padding-bottom:90px}
 .controller{max-width:960px;margin:0 auto;}
 .controller .button{float:left;padding:25px 0;width:50%;min-width:175px;}
 @media screen and (max-width: 500px){.controller .button{margin:0 auto;float:none;display:block}
 .controller .button:first-child{padding-top:0}
 }.controller .button i{color:#fff;font-size:170px}
 .controller .up,.controller .down{-webkit-border-radius:100%;border-radius:100%;width:150px;height:150px;margin:0 auto}
-.controller .up i{line-height:10px}
+.controller .up i{line-height:120px}
 .controller .down i{line-height:160px}
 .p1 .device-background,.p1 .device{background-color:#0ca3ff}
 .p1 .button{background-color:#0ca3ff;}
