@@ -16,6 +16,8 @@ module.exports = function() {
   $('#page').attr('class', 'gamepad');
   $('#page').html(view());
 
+  $('.device').height(screen.height - 90);
+
   observable = rx.Observable
     .interval(2000)
     .startWith(-1)
