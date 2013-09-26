@@ -7,29 +7,28 @@ button{width:90%;background-color:#2b9ea6;color:#fff;font-family:'Open Sans';-we
 button:hover{background-color:#61ced6}
 .note{font-style:italic;text-align:center}
 #page.lobby .foo{border:0}
-#page.gamepad{border:0;padding:0;}
-#page.gamepad .player,#page.gamepad .portrait,#page.gamepad .landscape{display:table;height:100%;width:100%}
-#page.gamepad .row{display:table-row}
-#page.gamepad .button{display:table-cell;vertical-align:middle}
-#page.gamepad .portrait .row{height:50%}
-#page.gamepad .portrait .button{width:100%}
-#page.gamepad .portrait .button.up{border-bottom:0}
-#page.gamepad .portrait .button.down{border-top:0}
-#page.gamepad .landscape .row{height:100%}
-#page.gamepad .landscape .button{width:50%}
-#page.gamepad .landscape .button.up{border-right:0}
-#page.gamepad .landscape .button.down{border-left:0}
-#page.gamepad .button{border:20px solid #000;display:table-cell;}
-#page.gamepad .button i{-webkit-background-size:10em;-moz-background-size:10em;background-size:10em;display:block;height:10em;margin:0 auto;width:10em}
-#page.gamepad .p1 .button{border-color:#0065a3;background-color:#0ca3ff;}
-#page.gamepad .p1 .button i{background-image:url("/device/images/button-p1.png")}
-#page.gamepad .p1 .button.pressed i{background-image:url("/device/images/button-p1-pressed.png")}
-#page.gamepad .p2 .button{border-color:#d65100;background-color:#ff7e30;}
-#page.gamepad .p2 .button i{background-image:url("/device/images/button-p2.png")}
-#page.gamepad .p2 .button.pressed i{background-image:url("/device/images/button-p2-pressed.png")}
-@media (orientation: landscape){#page.gamepad .portrait{display:none}
-}@media (orientation: portrait){#page.gamepad .landscape{display:none}
-}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.device-background{position:absolute;z-index:-1;height:90px;top:0;width:100%}
+.device{text-align:center;width:100%;height:100%;padding-bottom:90px}
+.controller{max-width:960px;margin:0 auto;}
+.controller .button{float:left;padding:25px 0;width:50%;min-width:175px;}
+@media screen and (max-width: 500px){.controller .button{margin:0 auto;float:none;display:block}
+.controller .button:first-child{padding-top:0}
+}.controller .button i{color:#fff;font-size:170px}
+.controller .up,.controller .down{-webkit-border-radius:100%;border-radius:100%;width:150px;height:150px;margin:0 auto}
+.controller .up i{line-height:10px}
+.controller .down i{line-height:160px}
+.p1 .device-background,.p1 .device{background-color:#0ca3ff}
+.p1 .button{background-color:#0ca3ff;}
+.p1 .button .up,.p1 .button .down{background-color:#0065a3}
+.p1 .button .pressed{background-color:#004772}
+.p2 .device-background,.p2 .device{background-color:#ff7e30}
+.p2 .button{background-color:#ff7e30;}
+.p2 .button .up,.p2 .button .down{background-color:#d65100}
+.p2 .button .pressed{background-color:#963900}
+.clearfix{zoom:1}
+.clearfix:before,.clearfix:after{content:"";display:table}
+.clearfix:after{clear:both}
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 body{margin:0;-webkit-font-smoothing:antialiased}
 #menu{background:#000;color:#eee;font-size:1.2em;position:absolute;right:1em;text-align:center;top:1em;z-index:1;}
 #menu i{display:block;height:2em;line-height:2.2em;width:2em}
