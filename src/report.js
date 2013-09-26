@@ -43,7 +43,7 @@ conn.on('response', function(res) {
 
     players.players.forEach(function(player) {
       keys.forEach(function(k) {
-        report.write(player[k]);
+        report.write(String(player[k]));
         report.write(',');
       });
       report.write('\n');

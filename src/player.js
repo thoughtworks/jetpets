@@ -36,7 +36,7 @@ exports.withPin = function(pin) {
 };
 
 exports.all = function() {
-  return players;
+  return {};
 };
 
 exports.delete = function(player) {
