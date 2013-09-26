@@ -23,17 +23,16 @@ module.exports = function() {
     .subscribe(checkGameStatus, onError);
 
   if ('ontouchstart' in window) {
-    $('.button.up').on('touchstart', goUp);
-    $('.button.up').on('touchend', stop);
-    $('.button.down').on('touchstart', goDown);
-    $('.button.down').on('touchend', stop);
+    $('.up').on('touchstart', goUp);
+    $('.up').on('touchend', stop);
+    $('.down').on('touchstart', goDown);
+    $('.down').on('touchend', stop);
   } else {
-    $('.button.up').on('mousedown', goUp);
-    $('.button.up').on('mouseup', stop);
-    $('.button.down').on('mousedown', goDown);
-    $('.button.down').on('mouseup', stop);
+    $('.up').on('mousedown', goUp);
+    $('.up').on('mouseup', stop);
+    $('.down').on('mousedown', goDown);
+    $('.down').on('mouseup', stop);
   }
-  
 };
 
 function goUp(e) {
