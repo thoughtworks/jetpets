@@ -4,27 +4,42 @@
 <form>
   
   <div class="field">
-    <label>First name</label>
+    <label>
+    	First name
+    	<span class="required">*</span>
+    </label>
     <input id="firstName" type="text" value="" autocorrect="off" />
   </div>
   
   <div class="field">
-    <label>Last name</label>
+    <label>
+   		 Last name
+   	 	<span class="required">*</span>
+    </label>
     <input id="lastName" type="text" value="" autocorrect="off" />
   </div>
 
   <div class="field">
-    <label>Email</label>
+    <label>
+    	Email
+    	<span class="required">*</span>
+    </label>
     <input id="email" type="email" value="" autocorrect="off" />
   </div>
   
   <div class="field">
-    <label>Company</label>
+    <label>
+    	Company
+    	<span class="required">*</span>
+    </label>
     <input id="company" type="text" value="" autocorrect="off" />
   </div>
   
   <div class="field">
-    <label>Role</label>
+    <label>
+    	Role
+    	<span class="required">*</span>
+    </label>
 	<select required id="role">
 	<option value="Select Role" selected>Select Role</option>
 	<option value="C-Level Executive">C-Level Executive</option>
@@ -41,7 +56,10 @@
   </div>
 
   <div class="field">
-    <label>Country</label>
+    <label>
+    	Country
+    	<span class="required">*</span>
+    </label>
 	<select required id="country">
 	<option value="Select Country" selected>Select Country</option>
 	<option value="DK">Denmark</option>
@@ -263,6 +281,13 @@
 	<option value="ZW">Zimbabwe</option></select>
   </div>
   
+  <div class="field">
+    <label>
+    	<span class="required">*</span>
+    	Required Fields
+    </label>
+  </div>
+
   <button>Play!</button>
   
 </form>
