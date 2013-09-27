@@ -2,7 +2,7 @@
   "name": "tw-aa-game",
   "description": "ThoughtWorks Agile Australia game",
   "engines": {
-      "node": "0.10.x"
+      "node": "0.10.17"
   },
   "dependencies": {
     "socket.io": ">= 0.9",
