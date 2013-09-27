@@ -1,14 +1,7 @@
 P1COLOR = #0065a3
 P2COLOR = #d65100
 
-
 #page.gamepad
-  // .body-gamepad-1
-  //   background-color: lighten(P1COLOR, 30%)
-
-  // .body-gamepad-2
-  //   background-color: lighten(P2COLOR, 30%)
-
   .device-background
     position: absolute
     z-index: -1;
@@ -28,12 +21,13 @@ P2COLOR = #d65100
       padding: 25px 0 
       width: 50%
       min-width: 175px
-      @media screen and (max-width: 480px)
-        &:first-child
-          padding-top: 0
+      @media screen and (max-width: 400px)
         margin: 0 auto
         float: none  
         display: block  
+        padding: 10px 0 
+        &:first-child
+          padding-top: 0
       i
         color: white;
         font-size: 170px;
@@ -44,13 +38,23 @@ P2COLOR = #d65100
       width: 150px
       height: 150px
       margin: 0 auto
+      @media screen and (max-width: 400px)
+        width: 130px
+        height: 130px
 
     .up
       i
         line-height: 120px
+        @media screen and (max-width: 400px)
+          line-height: 110px
+          font-size: 140px;
+
     .down 
       i
         line-height: 160px
+        @media screen and (max-width: 400px)
+          line-height: 150px
+          font-size: 140px;
 
   .p1
     .device-background, .device 
