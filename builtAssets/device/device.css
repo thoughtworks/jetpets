@@ -15,7 +15,7 @@ button:hover{background-color:#61ced6}
 #page.gamepad .device{text-align:center;width:100%}
 #page.gamepad .controller{max-width:960px;margin:0 auto;}
 #page.gamepad .controller .button{float:left;padding:25px 0;width:50%;min-width:175px;}
-@media screen and (max-width: 500px){#page.gamepad .controller .button{margin:0 auto;float:none;display:block}
+@media screen and (max-width: 480px){#page.gamepad .controller .button{margin:0 auto;float:none;display:block}
 #page.gamepad .controller .button:first-child{padding-top:0}
 }#page.gamepad .controller .button i{color:#fff;font-size:170px}
 #page.gamepad .controller .up,#page.gamepad .controller .down{cursor:pointer;-webkit-border-radius:100%;border-radius:100%;width:150px;height:150px;margin:0 auto}
