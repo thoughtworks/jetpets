@@ -7,7 +7,7 @@ var images = [
   'cone',
   'dog', 'dog-down', 'dog-up',
   'end-draw', 'end-winner',
-  'intro-about', 'intro-leaderboard', 'intro-title',
+  'intro-about', 'intro-leaderboard', 'intro-title', 'intro-tw',
   'particle-ball',
   'stadium', 'stadium-shake-left', 'stadium-shake-right',
   'intro-title'
