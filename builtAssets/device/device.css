@@ -1,11 +1,15 @@
 h1{font-family:'Open Sans';font-weight:300;text-align:center}
 input,button,select{background-color:#fff;border:1px solid #000;color:#000;display:block;font-size:1.8em;margin:.5em 0 1em 0;padding:.5em;text-align:center;width:100%}
+.error input,.error select{border:1px solid #f00}
 .field{width:90%;margin:0 auto}
 img{margin:1.5em}
 label{font-family:'Open Sans'}
 button{width:90%;background-color:#2b9ea6;color:#fff;font-family:'Open Sans';-webkit-border-radius:6px 6px;-moz-border-radius:6px/6px;-webkit-border-radius:6px/6px;border-radius:6px/6px;border:none;margin:1em auto}
 button:hover{background-color:#61ced6}
 .note{font-style:italic;text-align:center}
+.error{color:#f00}
+.required{margin-left:.3em;font-weight:bold;color:#e30066}
+.legend{margin:0 auto;font-size:.7em}
 #page.lobby .foo{border:0}
 #page.gamepad .device-background{position:absolute;z-index:-1;height:90px;top:0;width:100%}
 #page.gamepad .device{text-align:center;width:100%}
