@@ -36,7 +36,7 @@ exports.withPin = function(pin) {
 };
 
 exports.all = function() {
-  return {};
+  return _.map(players, function(p) { return _.omit(p, ['email', 'company', 'role']); });
 };
 
 exports.delete = function(player) {
