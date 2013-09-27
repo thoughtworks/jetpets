@@ -26,12 +26,11 @@ function giveFeedback(data){
 }
 
 function mapData(data){
-  return _.map(data,function(control){
-    if (control.val() === "" || control.val() === "Select Country" || control.val() === "Select Role" ){
-        return [control, control.val(), false];
-    } 
-    return [control,control.val(), true];
-  });
+  return _.inject(data, function(memo, control, key){
+    var isInvalid = (control.val() === "" || control.val() === "Select Country" || control.val() === "Select Role" );
+    memo[key] = [control, control.val(), !isInvalid];
+    return memo;
+  }, {});
 }
 
 function validate(data){
@@ -53,11 +52,10 @@ function register(e) {
   };
 
   var mappedData = mapData(data);
-
   var dataIsValid = validate(mappedData);
 
   if (dataIsValid){
-    var formData = _.map(mappedData, function(field){return field[1]});
+    var formData = _.inject(mappedData, function(m, field, key){ m[key] = field[1]; return m; }, {});
     console.log("FIELDS", formData);
     
     $.ajax({
