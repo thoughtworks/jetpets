@@ -16,12 +16,11 @@ module.exports = function() {
   
 };
 
-
-
 function giveFeedback(data){
    _.each(data, function(field, key){
       if (field[2] === false){
-        field[0].addClass("error");
+        field[0].parent().addClass("error");
+        field[0].parent().get(0).scrollIntoView()
       }
    });
 }
@@ -69,7 +68,6 @@ function register(e) {
       contentType: 'application/json; charset=utf-8'
     }).then(go).fail(error);
   
-    // $.post('/player', data).then(go).fail(error);
   }
   else {
     giveFeedback(mappedData); 
