@@ -1,7 +1,7 @@
 var routie = require('../../../3rdparty/routie');
 var player = require('../player');
 var _ = require('underscore');
-var view = require('../../views/register-advanced.hbs');
+var view = require('../../views/register-simple.hbs');
 
 module.exports = function() {
   
