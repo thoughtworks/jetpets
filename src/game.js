@@ -1,6 +1,12 @@
+'use strict';
+
 var _       = require('underscore');
 var bridge  = require('./bridge');
 var players = null;
+
+function emptySlot() {
+  return {id: null};
+}
 
 exports.clear = function() {
   players = [ emptySlot(), emptySlot() ];
@@ -32,29 +38,28 @@ exports.removePlayer = function(p) {
 };
 
 exports.hasPlayer = function(player) {
-  return players[0].id != null
-      && players[1].id != null;
-}
+  return players[0].id === player.id || players[1].id === player.id;
+};
 
 exports.inProgress = function() {
   return _.every(players, function(p) { return p.id !== null; });
 };
 
-exports.send = function(player, action) {
-  var idx = indexOf(player.id);
-  if (idx != null) {
-    bridge.send('player-action', {pindex: idx, action: action});
-  }
-}
-
-function emptySlot() {
-  return {id: null};
-}
+exports.isFull = function() {
+  return players[0].id !== null && players[1].id !== null;
+};
 
 function indexOf(id) {
   if (players[0].id === id) { return 0; }
   if (players[1].id === id) { return 1; }
   return null;
 }
+
+exports.send = function(player, action) {
+  var idx = indexOf(player.id);
+  if (idx !== null) {
+    bridge.send('player-action', {pindex: idx, action: action});
+  }
+};
 
 exports.clear();

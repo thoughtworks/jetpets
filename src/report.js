@@ -1,6 +1,8 @@
+'use strict';
+
 var fs = require ('fs');
 var knox = require('knox');
-var exec = require('child_process').exec;
+require('child_process').exec();
 
 function error(msg) {
   console.error(msg);
@@ -8,7 +10,7 @@ function error(msg) {
 }
 
 if (!fs.existsSync('./aws.json')) {
-  error("You're going to need the 'aws.json' file from MyTW.");
+  error('You\'re going to need the \'aws.json\' file from MyTW.');
 }
 
 // Get the players.json file from the server
@@ -16,12 +18,12 @@ var s3client = knox.createClient(require('../aws.json'));
 var conn = s3client.get('./players.json');
 
 conn.on('error', function() {
-  error("S3 didn't like what we did :(");
+  error('S3 didn\'t like what we did :(');
 });
 
 conn.on('response', function(res) {
-  if (res.statusCode == 404) {
-    error("Can't find the 'players.json' file in your S3 bucket.");
+  if (res.statusCode === 404) {
+    error('Can\'t find the \'players.json\' file in your S3 bucket.');
   }
   var playersData = '';
   res.setEncoding('utf8');
@@ -50,7 +52,7 @@ conn.on('response', function(res) {
     });
     report.end();
 
-    console.log("Produced 'report.csv'.");
+    console.log('Produced \'report.csv\'.');
   });
 });
 conn.end();

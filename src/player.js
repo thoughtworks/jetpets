@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('underscore');
 var uuid = require('node-uuid');
 var db = require('./db');
@@ -9,6 +11,10 @@ db.loadPlayers(function(err, list) {
   console.log('Loaded ' + list.length + ' players');
   players = list;
 });
+
+function randomPin() {
+  return ('0000' + Math.floor(Math.random() * 1000)).substr(-4);
+}
 
 exports.create = function(fields) {
   var def = {
@@ -24,8 +30,8 @@ exports.create = function(fields) {
 };
 
 exports.saveAll = function() {
-  db.savePlayers(players)
-}
+  db.savePlayers(players);
+};
 
 exports.withId = function(id) {
   return _.findWhere(players, {id: id});
@@ -43,8 +49,4 @@ exports.delete = function(player) {
   players = _.reject(players, function(p) { return p.id === player.id; });
 };
 
-function randomPin() {
-  return ('0000' + Math.floor(Math.random() * 1000)).substr(-4);
-}
-
-exports.randomPin = randomPin
+exports.randomPin = randomPin;

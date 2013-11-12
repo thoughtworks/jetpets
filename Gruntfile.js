@@ -1,3 +1,5 @@
+'use strict';
+
 var config = {};
 var fs = require('fs');
 
@@ -59,6 +61,16 @@ config.browserify2 = {
   }
 };
 
+config.jshint = {
+  options: {
+    jshintrc: '.jshintrc'
+  },
+  all: [
+    'Gruntfile.js',
+    'src/**/*.js'
+  ]
+};
+
 //
 // Static files
 //
@@ -95,7 +107,6 @@ config.watch = {
 //
 // Unit tests
 //
-
 config.simplemocha = {
   options: {
     globals: ['should', 'sinon'],
@@ -112,19 +123,19 @@ config.simplemocha = {
 config.heroku = {
   prereq: function(grunt) {
     if (!fs.existsSync('aws.json')) {
-      grunt.fail.fatal("You need 'aws.json'. Get it from the JetPets MyTW group.");
+      grunt.fail.fatal('You need \'aws.json\'. Get it from the JetPets MyTW group.');
     }
   },
 
   setConfig: function(grunt, signal) {
     var system = createSystem(grunt);
     var aws = require('./aws');
-    system("heroku config:set KEY=" + aws.key, function() {
-      grunt.log.writeln("Set key");
-      system("heroku config:set SECRET=" + aws.secret, function() {
-        grunt.log.writeln("Set secret");
-        system("heroku config:set BUCKET=" + aws.bucket, function() {
-          grunt.log.writeln("Set all config params. App is ready to run.");
+    system('heroku config:set KEY=' + aws.key, function() {
+      grunt.log.writeln('Set key');
+      system('heroku config:set SECRET=' + aws.secret, function() {
+        grunt.log.writeln('Set secret');
+        system('heroku config:set BUCKET=' + aws.bucket, function() {
+          grunt.log.writeln('Set all config params. App is ready to run.');
           signal();
         });
       });
@@ -138,16 +149,16 @@ config.heroku = {
       var done = grunt.task.current.async();
       config.heroku.prereq(grunt);
 
-      grunt.log.writeln("Creating Heroku app called: " + appName);
-      system("heroku create " + appName, function(err, result, code) {
+      grunt.log.writeln('Creating Heroku app called: ' + appName);
+      system('heroku create ' + appName, function(err, result, code) {
         if (code === 0) {
-          grunt.log.ok("Created app.");
+          grunt.log.ok('Created app.');
           config.heroku.setConfig(grunt, done);
         } else {
-          grunt.fail.fatal("Heroku app create failed: " + result);
+          grunt.fail.fatal('Heroku app create failed: ' + result);
         }
       });
-      grunt.log.writeln("After spawn.");
+      grunt.log.writeln('After spawn.');
     };
   },
 
@@ -166,8 +177,8 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['stylus', 'browserify2:admin', 'browserify2:device', 'browserify2:game', 'copy']);
-  grunt.registerTask('test',  'simplemocha');
+  grunt.registerTask('build', ['jshint', 'stylus', 'browserify2:admin', 'browserify2:device', 'browserify2:game', 'copy']);
+  grunt.registerTask('test',  ['jshint', 'simplemocha']);
 
   grunt.registerTask('app', 'Create Heroku app', config.heroku.createApp(grunt));
   grunt.registerTask('configure',

@@ -1,16 +1,17 @@
-var fs = require('fs');
+'use strict';
+
 var knox = require('knox');
 var s3client = knox.createClient({
-                                   key: process.env.KEY,
-                                   secret: process.env.SECRET,
-                                   bucket: process.env.BUCKET
-                                 });
+  key: process.env.KEY,
+  secret: process.env.SECRET,
+  bucket: process.env.BUCKET
+});
 
 var DB_FILE = './players.json';
 
 exports.loadPlayers = function(callback) {
   s3client.get(DB_FILE).on('response', function(res) {
-    if (res.statusCode == 404) {
+    if (res.statusCode === 404) {
       callback(null, []);
     } else {
       var data = '';
@@ -23,18 +24,18 @@ exports.loadPlayers = function(callback) {
   }).end();
 };
 
-exports.savePlayers = function(players, callback) {
+exports.savePlayers = function(players) {
   var content = JSON.stringify({players: players}, null, '\t') + '\n';
   var req = s3client.put(DB_FILE, {
-                           'Content-Length': content.length,
-                           'Content-Type': 'application/json'
-                         });
+    'Content-Length': content.length,
+    'Content-Type': 'application/json'
+  });
   req.on('response', function(res) {
-           if (res.statusCode == 200) {
-             console.log('Saved players to %s', res.url);
-           } else {
-             console.error('Something went wrong when saving players!');
-           }
-         });
+    if (res.statusCode === 200) {
+      console.log('Saved players to %s', res.url);
+    } else {
+      console.error('Something went wrong when saving players!');
+    }
+  });
   req.end(content);
 };

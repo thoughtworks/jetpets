@@ -2,7 +2,7 @@
   "name": "tw-aa-game",
   "description": "ThoughtWorks Agile Australia game",
   "engines": {
-      "node": "0.10.17"
+    "node": "0.10.17"
   },
   "dependencies": {
     "socket.io": ">= 0.9",
@@ -14,22 +14,23 @@
     "knox": "0.8.x"
   },
   "devDependencies": {
-      "matchdep": "~0.1.2",
-      "grunt": "~0.4.1",
-      "grunt-contrib-stylus": "~0.5.0",
-      "grunt-browserify2": "~0.1.6",
-      "grunt-contrib-copy": "*",
-      "grunt-contrib-watch": "~0.4.3",
-      "grunt-simple-mocha": "~0.4.0",
-      "hbsfy": "0.1.x",
-      "should": "1.2.x",
-      "sinon": "1.6.x",
-      "rxjs": "1.0.x",
-      "async": "0.2.x",
-      "Faker": "0.5.x",
-      "superagent": "0.14.x"
+    "matchdep": "~0.1.2",
+    "grunt": "~0.4.1",
+    "grunt-contrib-stylus": "~0.5.0",
+    "grunt-browserify2": "~0.1.6",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-watch": "~0.4.3",
+    "grunt-simple-mocha": "~0.4.0",
+    "hbsfy": "0.1.x",
+    "should": "1.2.x",
+    "sinon": "1.6.x",
+    "rxjs": "1.0.x",
+    "async": "0.2.x",
+    "Faker": "0.5.x",
+    "superagent": "0.14.x",
+    "grunt-contrib-jshint": "~0.7.1"
   },
   "scripts": {
-      "start": "node monitor.js"
+    "start": "node monitor.js"
   }
 }
