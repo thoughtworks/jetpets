@@ -1,5 +1,5 @@
 HOST = 10.11.12.145
-REQUIRED_FILES = package.json server.js monitor.js src builtAssets
+REQUIRED_FILES = aws.json package.json server.js monitor.js src builtAssets
 
 deploy:
 	grunt
