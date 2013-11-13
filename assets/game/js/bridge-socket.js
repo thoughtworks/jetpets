@@ -2,12 +2,26 @@ var io = require('../../3rdparty/socket.io.min');
 
 exports.connect = function(matchStart, playerMove) {
 
-  var socket = io.connect('/');
+  function openSocket() {
+    var socket = io.connect('/', {
+      'reconnect': false,
+      'force new connection': true
+    });
 
-  socket.emit('identify')
-  socket.on('match-start', matchStart);
-  socket.on('player-action', playerAction);
-  
+    socket.on('connect', function(){
+      console.log("connected!");
+      socket.emit('identify')
+    });
+
+    socket.on('match-start', matchStart);
+    socket.on('player-action', playerAction);
+
+    socket.on('disconnect', function(){
+      console.log("socket disconnected");
+      openSocket();
+    });
+  }
+
   function playerAction(args) {
     if (args.action === 'up') {
       console.log('[socket] move '  + args.pindex + ' up');
@@ -18,4 +32,5 @@ exports.connect = function(matchStart, playerMove) {
     }
   }
 
+  openSocket();
 };

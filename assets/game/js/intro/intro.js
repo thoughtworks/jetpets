@@ -3,6 +3,7 @@ var Leaderboard   = require('./entities/Leaderboard');
 var Title         = require('./entities/Title');
 var About         = require('./entities/About');
 var hub           = require('../engine/hub');
+var TwLogo        = require('./entities/tw-logo');
 
 function Intro(engine) {
   this.current = 0;
@@ -23,13 +24,15 @@ Intro.prototype.destroy = function(engine) {
 Intro.prototype.switch = function(engine) {
   this.removeAll(engine);
   ++this.current;
-  if (this.current % 3 === 1) engine.addEntity(new Leaderboard('leaderboard'));
-  if (this.current % 3 === 2) engine.addEntity(new Title('title'));
-  if (this.current % 3 === 0) engine.addEntity(new About('about'));
+  if (this.current % 4 === 1) engine.addEntity(new Leaderboard('leaderboard'));
+  if (this.current % 4 === 2) engine.addEntity(new Title('title'));
+  if (this.current % 4 === 3) engine.addEntity(new TwLogo('twlogo'));
+  if (this.current % 4 === 0) engine.addEntity(new About('about'));
 };
 
 Intro.prototype.removeAll = function(engine) {
   engine.deleteEntity('title');
+  engine.deleteEntity('twlogo');
   engine.deleteEntity('leaderboard');
   engine.deleteEntity('about');
 };
