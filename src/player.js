@@ -12,12 +12,13 @@ db.loadPlayers(function(err, list) {
 
 exports.create = function(fields) {
   var def = {
-    id: uuid.v4(),
-    pin: randomPin(),
-    topScore: 0,
     lastName: ''
   };
   var p = _.extend(def, fields);
+  def.id = uuid.v4();
+  def.pin = randomPin();
+  def.topScore = 0;
+
   players.push(p);
   db.savePlayers(players);
   return p;
