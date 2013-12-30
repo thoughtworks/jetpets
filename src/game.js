@@ -32,13 +32,16 @@ exports.removePlayer = function(p) {
 };
 
 exports.hasPlayer = function(player) {
-  return players[0].id != null
-      && players[1].id != null;
+  return players[0].id == player.id || players[1].id == player.id;
 }
 
 exports.inProgress = function() {
   return _.every(players, function(p) { return p.id !== null; });
 };
+
+exports.isFull = function() {
+    return players[0].id != null && players[1].id != null;
+}
 
 exports.send = function(player, action) {
   var idx = indexOf(player.id);
