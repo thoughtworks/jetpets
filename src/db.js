@@ -25,9 +25,9 @@ exports.loadPlayers = function(callback) {
 };
 
 exports.savePlayers = function(players) {
-  var content = JSON.stringify({players: players}, null, '\t') + '\n';
+  var content = JSON.stringify({players: players}, null, '\t');
   var req = s3client.put(DB_FILE, {
-    'Content-Length': content.length,
+    'Content-Length': new Buffer(content).length,
     'Content-Type': 'application/json'
   });
   req.on('response', function(res) {
