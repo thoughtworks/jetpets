@@ -24,6 +24,7 @@ We use [grunt](http://gruntjs.com) for building
 ```
 grunt		# builds all assets into ./build and watches for changes
 grunt test  # runs the unit tests
+grunt integrationTest # runs the integration tests (including verifying connectivity with AWS)
 ```
 
 Players are stored in a JSON file on S3, so you will need to include an aws.json file with S3 credentials in the root of the project. (ThoughtWorkers - there is one you can use on the jetpets myTW page).

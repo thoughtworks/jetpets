@@ -108,15 +108,28 @@ config.watch = {
 // Unit tests
 //
 config.simplemocha = {
-  options: {
-    globals: ['should', 'sinon'],
-    require: ['test/spec-helper.js'],
-    timeout: 3000,
-    ignoreLeaks: true,
-    ui: 'bdd',
-    reporter: 'spec'
+  unit: {
+    options: {
+      globals: ['should', 'sinon'],
+      require: ['test/spec-helper.js'],
+      timeout: 3000,
+      ignoreLeaks: true,
+      ui: 'bdd',
+      reporter: 'spec'
+    },
+    src: ['test/**/*.js']
   },
-  all: { src: ['test/**/*.js'] }
+  integration: {
+    options: {
+      globals: ['should', 'sinon'],
+      require: ['test/spec-helper.js'],
+      timeout: 10000,
+      ignoreLeaks: true,
+      ui: 'bdd',
+      reporter: 'spec'
+    },
+    src: ['integration/**/*.js']
+  }
 };
 
 // Heroku Setup
@@ -169,6 +182,27 @@ config.heroku = {
   }
 };
 
+// Integration test setup
+config.integration = {
+  setConfig: function(grunt, signal) {
+    if (!fs.existsSync('aws.json')) {
+      grunt.fail.fatal('You need \'aws.json\'. Get it from the JetPets MyTW group.');
+    }
+    var aws = require('./aws');
+    process.env.KEY = aws.key;
+    process.env.SECRET = aws.secret;
+    process.env.BUCKET = aws.bucket;
+    grunt.log.ok('Setting AWS credentials sucessful.');
+    signal();
+  },
+
+  configure: function(grunt) {
+    return function() {
+      config.integration.setConfig(grunt, grunt.task.current.async());
+    };
+  }
+};
+
 module.exports = function(grunt) {
   
   config.pkg = grunt.file.readJSON('package.json');
@@ -178,7 +212,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', 'build');
   grunt.registerTask('build', ['jshint', 'stylus', 'browserify2:admin', 'browserify2:device', 'browserify2:game', 'copy']);
-  grunt.registerTask('test',  ['jshint', 'simplemocha']);
+  grunt.registerTask('test',  ['jshint', 'simplemocha:unit']);
+
+  grunt.registerTask('integrationTestSetup', 'Setup integration tests with aws credentials', config.integration.configure(grunt));
+  grunt.registerTask('integrationTest',  ['integrationTestSetup', 'simplemocha:integration']);
 
   grunt.registerTask('app', 'Create Heroku app', config.heroku.createApp(grunt));
   grunt.registerTask('configure',
