@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 
-var DB_FILE = './players.json';
+var DB_FILE = require('config').repository.players.file || './players.json';
 
 exports.loadPlayers = function (callback) {
   fs.exists(DB_FILE, function (exists) {

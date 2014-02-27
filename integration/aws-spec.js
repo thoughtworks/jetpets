@@ -1,16 +1,16 @@
 require('./spec-helper.js');
-var db = require(SRC + '/db.js');
+var repository = require(SRC + '/repository/aws.js');
 
-describe('db', function () {
+describe('aws repository', function () {
 
   var testFile = './integrationTest/players.json';
 
   afterEach(function (done) {
-    db.deleteAllPlayers(testFile, done);
+    repository.deleteAllPlayers(testFile, done);
   });
 
   it("can add and retrieve players from AWS", function (done) {
-    db.loadPlayers(function (err, list) {
+    repository.loadPlayers(function (err, list) {
         list.length.should.eql(0);
 
         var players = [];
@@ -31,11 +31,11 @@ describe('db', function () {
         };
         players.push(playerWithSpecialChars);
 
-        db.savePlayers(
+        repository.savePlayers(
           players,
           testFile,
           function () {
-            db.loadPlayers(function (err, list) {
+            repository.loadPlayers(function (err, list) {
                 var players = list;
                 list.length.should.eql(2);
                 list.should.eql(players);

@@ -2,9 +2,15 @@
 
 var knox = require('knox');
 var s3client = null;
+var DB_FILE = require('config').repository.players.file || './players.json';
 
 var getClient = function () {
   if (s3client === null) {
+    if (!process.env.KEY || !process.env.SECRET || !process.env.BUCKET) {
+      console.error('AWS credentials not present. Make sure you load them from aws.json.');
+      process.exit(1);
+    }
+
     s3client = knox.createClient({
       key: process.env.KEY,
       secret: process.env.SECRET,
@@ -13,8 +19,6 @@ var getClient = function () {
   }
   return s3client;
 };
-
-var DB_FILE = './players.json';
 
 exports.loadPlayers = function (callback, fileName) {
   var s3client = getClient();

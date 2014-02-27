@@ -11,7 +11,9 @@
     "underscore": "1.4.x",
     "node-uuid": "1.4.x",
     "chromath": "git://github.com/jfsiii/chromath.git",
-    "knox": "0.8.x"
+    "knox": "0.8.x",
+    "config": "0.4.35",
+    "yaml": "0.2.3"
   },
   "devDependencies": {
     "matchdep": "~0.1.2",
