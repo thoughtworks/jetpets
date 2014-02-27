@@ -28,7 +28,8 @@
     "async": "0.2.x",
     "Faker": "0.5.x",
     "superagent": "0.14.x",
-    "grunt-contrib-jshint": "~0.7.1"
+    "grunt-contrib-jshint": "~0.7.1",
+    "rewire": "2.0.0"
   },
   "scripts": {
     "start": "node monitor.js"
