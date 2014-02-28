@@ -2,12 +2,12 @@
 
 var _ = require('underscore');
 var uuid = require('node-uuid');
-var db = require('./db');
+var repository = require('./repository/playerRepositoryFactory').getInstance();
 
 // Load players from disk.. eventually this could be a DB
 var players = [];
 
-db.loadPlayers(function(err, list) {
+repository.loadPlayers(function(err, list) {
   console.log('Loaded ' + list.length + ' players');
   players = list;
 });
@@ -25,12 +25,12 @@ exports.create = function(fields) {
   };
   var p = _.extend(def, fields);
   players.push(p);
-  db.savePlayers(players);
+  repository.savePlayers(players);
   return p;
 };
 
 exports.saveAll = function() {
-  db.savePlayers(players);
+  repository.savePlayers(players);
 };
 
 exports.withId = function(id) {

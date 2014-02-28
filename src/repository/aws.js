@@ -1,15 +1,27 @@
 'use strict';
 
 var knox = require('knox');
-var s3client = knox.createClient({
-  key: process.env.KEY,
-  secret: process.env.SECRET,
-  bucket: process.env.BUCKET
-});
+var s3client = null;
+var DB_FILE = require('config').repository.players.file || './players.json';
 
-var DB_FILE = './players.json';
+var getClient = function () {
+  if (s3client === null) {
+    if (!process.env.KEY || !process.env.SECRET || !process.env.BUCKET) {
+      console.error('AWS credentials not present. Make sure you load them from aws.json.');
+      process.exit(1);
+    }
+
+    s3client = knox.createClient({
+      key: process.env.KEY,
+      secret: process.env.SECRET,
+      bucket: process.env.BUCKET
+    });
+  }
+  return s3client;
+};
 
 exports.loadPlayers = function (callback, fileName) {
+  var s3client = getClient();
   var playerFile = fileName || DB_FILE;
   console.log('Loading players from file %s', playerFile);
   s3client.get(playerFile).on('response',function (res) {
@@ -29,6 +41,7 @@ exports.loadPlayers = function (callback, fileName) {
 };
 
 exports.savePlayers = function (players, fileName, callback) {
+  var s3client = getClient();
   var playerFile = fileName || DB_FILE;
   console.log('Trying to save players to %s', playerFile);
   var content = JSON.stringify({players: players}, null, '\t');
