@@ -11,18 +11,6 @@ var options = {
   watchIgnoreDotFiles: true
 };
 
-if ('aws' === require('config').repository.players.location) {
-  if (!fs.existsSync('./aws.json')) {
-    console.error("You'll need 'aws.json'. Grab it from the JetPets group on MyTW.");
-    process.exit(1);
-  }
-
-  var aws = require('./aws');
-  process.env['KEY'] = aws.key;
-  process.env['SECRET'] = aws.secret;
-  process.env['BUCKET'] = aws.bucket;
-}
-
 var monitor = new forever.Monitor('server.js', options);
 
 monitor.on('watch:restart', function(info) {
