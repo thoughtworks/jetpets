@@ -1,9 +1,11 @@
+'use strict';
+
 var fs = require('fs');
 
-var DB_FILE = './players.json';
+var DB_FILE = require('config').repository.players.file || './players.json';
 
-exports.loadPlayers = function(callback) {
-  fs.exists(DB_FILE, function(exists) {
+exports.loadPlayers = function (callback) {
+  fs.exists(DB_FILE, function (exists) {
     if (exists) {
       fs.readFile(DB_FILE, function (err, data) {
         if (err) {
@@ -17,12 +19,16 @@ exports.loadPlayers = function(callback) {
   });
 };
 
-exports.savePlayers = function(players, callback) {
+exports.savePlayers = function (players, callback) {
   var content = JSON.stringify({players: players}, null, '\t');
   fs.writeFile(DB_FILE, content, function (err) {
     if (callback) {
-      if (err) callback(err);
-      else callback(null);
+      if (err) {
+        callback(err);
+      }
+      else {
+        callback(null);
+      }
     }
   });
 };

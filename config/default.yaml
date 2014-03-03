@@ -1,0 +1,4 @@
+repository:
+  players:
+    location: filesystem
+    file: ./players.json

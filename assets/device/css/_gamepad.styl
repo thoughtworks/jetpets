@@ -2,76 +2,88 @@ P1COLOR = #0065a3
 P2COLOR = #d65100
 
 #page.gamepad
-
-  border: 0
-  padding: 0
-
-  .player, .portrait, .landscape
-    display: table
-    height: 100%
+  .device-background
+    position: absolute
+    z-index: -1;
+    height: 90px
+    top: 0;
     width: 100%
 
-  .row
-    display: table-row
+  .device
+    text-align: center
+    width: 100%
 
-  .button
-    display: table-cell
-    vertical-align: middle
-  
-  .portrait
-    .row
-      height: 50%
-    .button
-      width: 100%
-    .button.up
-      border-bottom: 0
-    .button.down
-      border-top: 0
-
-  .landscape
-    .row
-      height: 100%
-    .button
+  .controller
+    max-width: 960px
+    margin: 0 auto
+    .button 
+      float: left
+      padding: 25px 0 
       width: 50%
-    .button.up
-      border-right: 0
-    .button.down
-      border-left: 0
-  
-  .button
-    border: 20px solid #000
-    display: table-cell
-    i
-      background-size: 10em
-      display: block
-      height: 10em
+      min-width: 175px
+      @media screen and (max-width: 400px)
+        margin: 0 auto
+        float: none  
+        display: block  
+        padding: 10px 0 
+        &:first-child
+          padding-top: 0
+      i
+        color: white;
+        font-size: 170px;
+
+    .up, .down
+      cursor: pointer
+      border-radius: 100%
+      width: 150px
+      height: 150px
       margin: 0 auto
-      width: 10em
+      @media screen and (max-width: 400px)
+        width: 130px
+        height: 130px
+
+    .up
+      i
+        line-height: 120px
+        @media screen and (max-width: 400px)
+          line-height: 110px
+          font-size: 140px;
+
+    .down 
+      i
+        line-height: 160px
+        @media screen and (max-width: 400px)
+          line-height: 150px
+          font-size: 140px;
 
   .p1
-    .button
-      border-color: P1COLOR
+    .device-background, .device 
       background-color: lighten(P1COLOR, 30%)
-      i
-        background-image: url('/device/images/button-p1.png')
-      &.pressed i
-        background-image: url('/device/images/button-p1-pressed.png')
+    .button
+      background-color: lighten(P1COLOR, 30%)
+      .up, .down 
+        background-color: P1COLOR   
+      .pressed
+        background-color: darken(P1COLOR, 30%)
     
   .p2
-    .button
-      border-color: P2COLOR
+    .device-background, .device
       background-color: lighten(P2COLOR, 30%)
-      i
-        background-image: url('/device/images/button-p2.png')
-      &.pressed i
-        background-image: url('/device/images/button-p2-pressed.png')
+    .button
+      background-color: lighten(P2COLOR, 30%)
+      .up, .down 
+        background-color: P2COLOR
+      .pressed
+        background-color: darken(P2COLOR, 30%)
 
-@media (orientation: landscape)
-  #page.gamepad
-    .portrait
-      display: none
-  
-@media (orientation: portrait)
-  #page.gamepad
-    .landscape
-      display: none
+  .clearfix {
+    zoom: 1;
+  }
+  .clearfix:before,
+  .clearfix:after {
+    content: "";
+    display: table;
+  }
+  .clearfix:after {
+    clear: both;
+  }

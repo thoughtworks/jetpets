@@ -1,14 +1,20 @@
+'use strict';
+
 var _ = require('underscore');
 var uuid = require('node-uuid');
-var db = require('./db');
+var repository = require('./repository/playerRepositoryFactory').getInstance();
 
 // Load players from disk.. eventually this could be a DB
 var players = [];
 
-db.loadPlayers(function(err, list) {
+repository.loadPlayers(function(err, list) {
   console.log('Loaded ' + list.length + ' players');
   players = list;
 });
+
+function randomPin() {
+  return ('0000' + Math.floor(Math.random() * 1000)).substr(-4);
+}
 
 exports.create = function(fields) {
   var def = {
@@ -20,13 +26,13 @@ exports.create = function(fields) {
   def.topScore = 0;
 
   players.push(p);
-  db.savePlayers(players);
+  repository.savePlayers(players);
   return p;
 };
 
 exports.saveAll = function() {
-  db.savePlayers(players)
-}
+  repository.savePlayers(players);
+};
 
 exports.withId = function(id) {
   return _.findWhere(players, {id: id});
@@ -37,15 +43,11 @@ exports.withPin = function(pin) {
 };
 
 exports.all = function() {
-  return players;
+  return _.map(players, function(p) { return _.omit(p, ['email', 'company', 'role']); });
 };
 
 exports.delete = function(player) {
   players = _.reject(players, function(p) { return p.id === player.id; });
 };
 
-function randomPin() {
-  return ('0000' + Math.floor(Math.random() * 1000)).substr(-4);
-}
-
-exports.randomPin = randomPin
+exports.randomPin = randomPin;

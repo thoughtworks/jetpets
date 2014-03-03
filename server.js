@@ -13,7 +13,8 @@ var app = express();
 var logFile = fs.createWriteStream('./app.log', { flags: 'a' })
 
 app.configure(function() {
-  app.set('port', process.env.port || 8080)
+  app.set('port', process.env.PORT || 8080)
+  console.log("port = " + process.env.PORT);
   app.use(express.logger({
     format: 'default',
     stream: logFile
@@ -34,18 +35,27 @@ server.listen(app.get('port'), function() {
 });
 
 io.sockets.on('connection', function(socket) {
+  var socketType = "unidentified";
+  console.log("New socket connection");
   socket.on('identify', function() {
+    socketType = "gameView";
     // gameview has identified itself
     bridge.connect(socket)
     console.log('Established connection with gameview');
   })
 
   socket.on('move', function(data) {
+    console.log('Received movement from player');
+    socketType = "player";
     // player moved
     var p = Player.withId(data.player);
     if (p) {
       game.send(p, data.action);
     }
+  })
+
+  socket.on('disconnect', function () {
+    console.log("Socket is gone: " + socketType);
   })
 });
 

@@ -1,5 +1,6 @@
 var routie = require('../../../3rdparty/routie');
 var player = require('../player');
+var _ = require('underscore');
 var view = require('../../views/register-simple.hbs');
 
 module.exports = function() {
@@ -15,26 +16,61 @@ module.exports = function() {
   
 };
 
+function giveFeedback(data){
+   _.each(data, function(field, key){
+      field[0].parent().removeClass("error");
+      if (field[2] === false){
+        field[0].parent().addClass("error");
+        field[0].parent().get(0).scrollIntoView()
+      }
+   });
+}
+
+function mapData(data){
+  return _.inject(data, function(memo, control, key){
+    var isInvalid = (control.val() === "" || control.val() === "Select Country" || control.val() === "Select Role" );
+    memo[key] = [control, control.val(), !isInvalid];
+    return memo;
+  }, {});
+}
+
+function validate(data){
+  return _.every(data, function(field){
+    return field[2];
+  });
+}
+
 function register(e) {
+  e.preventDefault();
+
   var data = {
-    firstName:    $('#firstName').val(),
-    lastName:     $('#lastName').val(),
-    phoneNumber:  $('#phoneNumber').val(),
-    company:      $('#company').val(),
-    role:         $('#role').val(),
-    email:        $('#email').val()
+    firstName:    $('#firstName'),
+    lastName:     $('#lastName'),
+    company:      $('#company'),
+    country:      $('#country'),
+    role:         $('#role'),
+    email:        $('#email')
   };
-  console.log("FIELDS", data);
-  $.ajax({
-    type: 'POST',
-    url: '/player',
-    data: JSON.stringify(data),
-    dataType: 'json',
-    contentType: 'application/json; charset=utf-8'
-  }).then(go).fail(error);
+
+  var mappedData = mapData(data);
+  var dataIsValid = validate(mappedData);
+
+  if (dataIsValid){
+    var formData = _.inject(mappedData, function(m, field, key){ m[key] = field[1]; return m; }, {});
+    console.log("FIELDS", formData);
+    
+    $.ajax({
+      type: 'POST',
+      url: '/player',
+      data: JSON.stringify(formData),
+      dataType: 'json',
+      contentType: 'application/json; charset=utf-8'
+    }).then(go).fail(error);
   
-  // $.post('/player', data).then(go).fail(error);
-  return false
+  }
+  else {
+    giveFeedback(mappedData); 
+  }
 }
 
 function go(data) {

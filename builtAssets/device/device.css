@@ -1,0 +1,45 @@
+h1{font-family:'Open Sans';font-weight:300;text-align:center}
+input,button,select{background-color:#fff;border:1px solid #000;color:#000;display:block;font-size:1.8em;margin:.5em 0 1em 0;padding:.5em;text-align:center;width:100%}
+.error input,.error select{border:1px solid #f00}
+.field{width:90%;margin:0 auto}
+img{margin:1.5em}
+label{font-family:'Open Sans'}
+.wait-message{font-family:'Open Sans';width:90%;margin:0 auto;text-align:center}
+button{width:90%;background-color:#2b9ea6;color:#fff;font-family:'Open Sans';-webkit-border-radius:6px 6px;-moz-border-radius:6px/6px;-webkit-border-radius:6px/6px;border-radius:6px/6px;border:none;margin:1em auto}
+button:hover{background-color:#61ced6}
+.note{font-style:italic;text-align:center}
+.error{color:#f00}
+.required{margin-left:.3em;font-weight:bold;color:#e30066}
+.legend{margin:0 auto;font-size:.7em}
+#page.lobby .foo{border:0}
+#page.gamepad .device-background{position:absolute;z-index:-1;height:90px;top:0;width:100%}
+#page.gamepad .device{text-align:center;width:100%}
+#page.gamepad .controller{max-width:960px;margin:0 auto;}
+#page.gamepad .controller .button{float:left;padding:25px 0;width:50%;min-width:175px;}
+@media screen and (max-width: 400px){#page.gamepad .controller .button{margin:0 auto;float:none;display:block;padding:10px 0}
+#page.gamepad .controller .button:first-child{padding-top:0}
+}#page.gamepad .controller .button i{color:#fff;font-size:170px}
+#page.gamepad .controller .up,#page.gamepad .controller .down{cursor:pointer;-webkit-border-radius:100%;border-radius:100%;width:150px;height:150px;margin:0 auto;}
+@media screen and (max-width: 400px){#page.gamepad .controller .up,#page.gamepad .controller .down{width:130px;height:130px}
+}#page.gamepad .controller .up i{line-height:120px;}
+@media screen and (max-width: 400px){#page.gamepad .controller .up i{line-height:110px;font-size:140px}
+}#page.gamepad .controller .down i{line-height:160px;}
+@media screen and (max-width: 400px){#page.gamepad .controller .down i{line-height:150px;font-size:140px}
+}#page.gamepad .p1 .device-background,#page.gamepad .p1 .device{background-color:#0ca3ff}
+#page.gamepad .p1 .button{background-color:#0ca3ff;}
+#page.gamepad .p1 .button .up,#page.gamepad .p1 .button .down{background-color:#0065a3}
+#page.gamepad .p1 .button .pressed{background-color:#004772}
+#page.gamepad .p2 .device-background,#page.gamepad .p2 .device{background-color:#ff7e30}
+#page.gamepad .p2 .button{background-color:#ff7e30;}
+#page.gamepad .p2 .button .up,#page.gamepad .p2 .button .down{background-color:#d65100}
+#page.gamepad .p2 .button .pressed{background-color:#963900}
+#page.gamepad .clearfix{zoom:1}
+#page.gamepad .clearfix:before,#page.gamepad .clearfix:after{content:"";display:table}
+#page.gamepad .clearfix:after{clear:both}
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+body{margin:0;-webkit-font-smoothing:antialiased}
+#menu{background:#000;color:#eee;font-size:1.2em;position:absolute;right:1em;text-align:center;top:1em;z-index:1;}
+#menu i{display:block;height:2em;line-height:2.2em;width:2em}
+#page{background:#fff;bottom:0;color:#000;left:0;right:0;top:0}
+h1{font-size:3em;padding:.6em 0;margin:0}
+p{font-size:1.1em;line-height:1.4em;margin:1em 0 2em 0}

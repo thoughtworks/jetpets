@@ -24,6 +24,7 @@ We use [grunt](http://gruntjs.com) for building
 ```
 grunt		# builds all assets into ./build and watches for changes
 grunt test  # runs the unit tests
+grunt integrationTest # runs the integration tests (including verifying connectivity with AWS)
 ```
 
 And finally
@@ -36,6 +37,19 @@ This starts the server, and restarts it
 
 - if something goes wrong
 - when any server-side code changes
+
+
+There are two different modes to run the app:
+
+1. The default way stores the player data in a local JSON file. This is the recommended mode for running the application
+in a LAN for development purposes or when there's no decent internet access. This mode will be the default if you start
+the application via
+``` npm start ``` or
+``` node server.js ```
+2. The other mode stores the player data on S3, so you will need to include an aws.json file with S3 credentials in
+the root of the project. (ThoughtWorkers - there is one you can use on the jetpets myTW page). This mode will be
+activated if you start the application via ``` node server.js --NODE_ENV=heroku ```
+
 
 ## Playing the game
 
@@ -53,8 +67,17 @@ The game needs to be built locally first, and the server will just:
 - run the server code (`/src`)
 - serve static assets & files (`/builtAssets`)
 
-Just run `make deploy` to build & copy all the required files over SSH.
+Just run `make deploy [HOST=<IP address>]` to build & copy all the required files over SSH.
+
 The server will need to run `npm install --production` to get all the runtime dependencies.
+
+## Deploying to Heroku
+
+You'll need to have the Heroku Toolbelt installed and a Heroku account. (ThoughtWorkers - see the myTW jetpets page for Heroku credentials)
+
+* If you need to create a new Heroku app for jetpets, use 'grunt app:&lt;new-app-name&gt;'.
+* If there is already an app, add it as a git remote ('git remote add heroku git@heroku.com:&lt;existing-app-name&gt;').
+* Once the app is set up, be sure to generate the build assets first ('grunt build'), before deploying ('git push heroku master').
 
 ## Attribution
 

@@ -1,5 +1,6 @@
-/builtAssets
 /node_modules
 /players.json
 .DS_Store
 *.log
+aws.json
+.idea/
